@@ -3,150 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matheus D. S. | Portfólio Profissional</title>
+    <title>matheus@infrastructure:~$</title>
     <style>
-        /* Configurações Gerais e Cores */
+        /* Paleta de Cores Terminal / Matrix */
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-color: #38bdf8;
-            --border-color: #334155;
+            --bg-main: #0a0f0d;
+            --bg-card: #111816;
+            --border-color: #1f3d33;
+            --text-neon: #39ff14;      /* Verde Matrix clássico */
+            --text-secundario: #a3b8b0;
+            --text-dim: #4e7a6b;
+            --terminal-prompt: #00bfff; /* Azul clássico de bash */
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Courier New', Courier, monospace; /* Fonte estilo código */
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-main);
+            color: var(--text-secundario);
             line-height: 1.6;
             padding: 2rem 1rem;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            border: 1px solid var(--border-color);
+            background-color: #0d1311;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.05);
         }
 
-        /* Cabeçalho */
-        header {
-            text-align: center;
-            padding: 3rem 0;
+        /* Barra superior da janela do terminal */
+        .window-header {
+            background-color: #16221f;
+            padding: 0.6rem 1rem;
+            display: flex;
+            align-items: center;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 2.5rem;
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -0.05em;
+        .window-buttons {
+            display: flex;
+            gap: 6px;
+            margin-right: 15px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+        }
+
+        .window-title {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        /* Conteúdo Principal do Terminal */
+        .terminal-body {
+            padding: 2rem;
+        }
+
+        /* Cabeçalho do Usuário */
+        header {
+            margin-bottom: 3rem;
+        }
+
+        .prompt-line {
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
         }
 
-        header p {
-            color: var(--accent-color);
-            font-size: 1.1rem;
-            font-weight: 500;
-            max-width: 600px;
-            margin: 0 auto;
+        .user-host { color: var(--text-neon); font-weight: bold; }
+        .directory { color: #fff; }
+        
+        header h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
         }
 
-        /* Seções */
+        .tagline {
+            color: var(--text-neon);
+            font-size: 1rem;
+            border-left: 3px solid var(--text-neon);
+            padding-left: 10px;
+            margin-top: 0.5rem;
+        }
+
+        /* Seções e Blocos */
         section {
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
         }
 
         h2 {
-            font-size: 1.5rem;
-            color: var(--text-main);
-            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
         }
 
-        h2::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: var(--border-color);
+        h2::before {
+            content: ">> ";
+            color: var(--text-neon);
         }
 
-        p.description {
-            color: var(--text-muted);
-            font-size: 1.05rem;
+        .section-desc {
+            color: var(--text-secundario);
+            background: rgba(31, 61, 51, 0.2);
+            padding: 1rem;
+            border-left: 2px solid var(--text-dim);
+            margin-bottom: 1.5rem;
         }
 
-        /* Cards de Experiência e Projetos */
-        .card {
-            background-color: var(--card-bg);
+        /* Estrutura de Tabela/Grid estilo Documentação */
+        .grid-data {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .data-row {
+            background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-            transition: transform 0.2s, border-color 0.2s;
+            padding: 1.2rem;
+            transition: all 0.2s ease;
         }
 
-        .card:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
+        .data-row:hover {
+            border-color: var(--text-neon);
+            background-color: #15201d;
         }
 
-        .card-header {
+        .row-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.5rem;
             margin-bottom: 0.5rem;
-            gap: 0.5rem;
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            color: var(--text-main);
-            font-weight: 600;
-        }
-
-        .card-company {
-            color: var(--accent-color);
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .card-badge {
-            background-color: var(--border-color);
-            color: var(--text-muted);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-
-        .card-content {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* Listas de Competências Técnicas (Opcional para expandir depois) */
-        .tech-tags {
-            display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1rem;
         }
 
-        .tag {
-            background-color: #0284c7;
+        .title-main {
             color: #fff;
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .title-sub {
+            color: var(--text-neon);
+        }
+
+        .badge {
+            color: var(--text-dim);
             font-size: 0.85rem;
-            font-weight: 500;
+        }
+
+        .row-body {
+            font-size: 0.95rem;
+            color: var(--text-secundario);
         }
     </style>
 </head>
@@ -154,51 +183,78 @@
 
     <div class="container">
         
-        <!-- Cabeçalho Principal -->
-        <header>
-            <h1>Matheus D. S.</h1>
-            <p>Profissional em Infraestrutura, Banco de Dados, Redes e Governança em TI</p>
-        </header>
+        <!-- Barra de Controle Simulada -->
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="window-title">matheus@infrastructure: ~ (bash)</div>
+        </div>
 
-        <!-- Seção Sobre Mim -->
-        <section>
-            <h2>Sobre Mim</h2>
-            <p class="description">
-                Profissional focado em garantir a disponibilidade, segurança e performance de ambientes corporativos. Atualmente cursando Análise e Desenvolvimento de Sistemas (ADS), conto com 6 anos de experiência prática consolidada no setor de Tecnologia da Informação.
-            </p>
-        </section>
+        <!-- Escopo do Terminal -->
+        <div class="terminal-body">
+            
+            <!-- Cabeçalho Principal -->
+            <header>
+                <div class="prompt-line">
+                    <span class="user-host">matheus@infrastructure</span>:<span class="directory">~</span>$ neofetch
+                </div>
+                <h1>Matheus D. S.</h1>
+                <div class="tagline">Profissional em Infraestrutura, Banco de Dados, Redes e Governança em TI</div>
+            </header>
 
-        <!-- Seção Experiência Profissional -->
-        <section>
-            <h2>Experiência Profissional</h2>
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Assistente de TI</div>
-                        <div class="card-company">Egelte Engenharia</div>
+            <!-- Seção Sobre Mim -->
+            <section>
+                <h2>Sobre_Mim</h2>
+                <div class="section-desc">
+                    Estou formando ADS, tenho 6 anos de experiência prática em TI.
+                </div>
+            </section>
+
+            <!-- Seção Experiência -->
+            <section>
+                <h2>Experiencia_Profissional</h2>
+                <div class="grid-data">
+                    
+                    <div class="data-row">
+                        <div class="row-header">
+                            <div>
+                                <span class="title-main">Assistente de TI</span>
+                                <span class="title-sub">@ Egelte Engenharia</span>
+                            </div>
+                            <span class="badge">[6 ANOS - ATUAL]</span>
+                        </div>
+                        <div class="row-body">
+                            Atuação concentrada no suporte e administração de ambientes críticos corporativos, garantindo eficiência operacional e governança na infraestrutura de servidores e comunicações.
+                        </div>
                     </div>
-                    <span class="card-badge">6 anos (Atual)</span>
-                </div>
-                <div class="card-content">
-                    Atuação direta no suporte de infraestrutura corporativa, gerenciamento de sistemas, conectividade de redes e apoio técnico para a continuidade dos processos do negócio.
-                </div>
-            </div>
-        </section>
 
-        <!-- Seção Projetos Práticos -->
-        <section>
-            <h2>Projetos Práticos</h2>
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Migração de Dados para Nuvem</div>
-                    <span class="card-badge">SharePoint Online</span>
                 </div>
-                <div class="card-content">
-                    Responsável direto pelo planejamento e execução da migração de dados e arquivos corporativos para o ambiente em nuvem, centralizando a governança da informação através do SharePoint e garantindo maior colaboração e segurança.
-                </div>
-            </div>
-        </section>
+            </section>
 
+            <!-- Seção Projetos -->
+            <section>
+                <h2>Projetos_Praticos</h2>
+                <div class="grid-data">
+                    
+                    <div class="data-row">
+                        <div class="row-header">
+                            <div>
+                                <span class="title-main">Migração de dados para nuvem</span>
+                            </div>
+                            <span class="badge">[DEPLOY: COMPLETED]</span>
+                        </div>
+                        <div class="row-body">
+                            Responsável direto pelo planejamento estrutural e implantação do SharePoint na empresa, centralizando a gestão de arquivos corporativos com foco em controle de acessos, estabilidade e conformidade.
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
     </div>
 
 </body>
